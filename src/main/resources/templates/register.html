@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>RegisterPage</title>
+    <link rel="stylesheet" th:href="@{/css/button.css}">
+</head>
+<body>
+
+<h2>Please Register</h2>
+
+<h3>For the Username please use only letters and numbers</h3>
+<h3>For the Password please use 8 or more characters which contains at least 1 capital letter, 1 small letter, 1 number and 1 special character</h3>
+
+<div th:if="${message3} =='null_username'">please fill Username field</div>
+<div th:if="${message3} =='null_password'">please fill Password field</div>
+<div th:if="${message3} =='null_confirm_password'">please fill ConfirmPassword field</div>
+<div th:if="${message3} =='exists'">username already exists</div>
+<div th:if="${message3} =='num_lett'">please use only letters and numbers for username</div>
+<div th:if="${message3} =='pass_not_match'">please enter the same password</div>
+<div th:if="${message3} =='pass_not_8char'">please use 8 or more characters for the passwords</div>
+<div th:if="${message3} =='pass_cont_issue'">please use at least 1 capital letter, 1 small letter, 1 number and 1 special character in the passwords</div>
+
+<form th:action="@{/register-handler}" method="post">
+    <div><input type="text" name="username" placeholder="Username"/></div>
+    <div><input type="password" name="password" placeholder="Password"/></div>
+    <div><input type="password" name="confirm_password" placeholder="ConfirmPassword"/></div>
+    <input type="submit" value="Register">
+</form>
+<h3><a href="http://localhost:8080/login" class="button">Go to Log in Page</a></h3>
+<h3><a href="http://localhost:8080/" class="button">Go to the Home Page</a></h3>
+
+</body>
+</html>

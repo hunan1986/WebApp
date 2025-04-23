@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>LogIn</title>
+    <link rel="stylesheet" th:href="@{/css/button.css}">
+</head>
+<body>
+
+<h2>Please Log In</h2>
+
+<div th:if="${message1} =='invUser'">Invalid username and password.</div>
+<div th:if="${message1} =='logSuccess'">You have been logged out.</div>
+<div th:if="${message1} =='reg_info'">You are successfully registered.</div>
+
+<form th:action="@{/login}" method="post">
+    <div><input type="text" name="username" placeholder="Username"/></div>
+    <div><input type="password" name="password" placeholder="Password"/></div>
+    <input type="submit" value="Log in">
+</form>
+<h3><a href="http://localhost:8080/register" class="button">Go to Register Page</a></h3>
+<h3><a href="http://localhost:8080/" class="button">Go to the Home Page</a></h3>
+
+</body>
+</html>

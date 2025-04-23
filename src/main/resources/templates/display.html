@@ -1,0 +1,60 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>DisplayPage</title>
+    <link rel="stylesheet" th:href="@{/css/button.css}">
+</head>
+<body>
+
+<div th:if="${message5} =='emp_table_ok'"><h2>All Employees Data Table</h2></div>
+<div th:if="${message5} =='emp_table_bad'"><h2>Database Is Empty</h2></div>
+<div th:if="${message5} =='emp_table_by_salary_ok'"><h2>All Employees Data Table Sorted By Salary</h2></div>
+<div th:if="${message5} =='emp_table_by_firstname_ok'"><h2>All Employees Data Table Sorted By Firstname</h2></div>
+<div th:if="${message5} =='emp_table_by_lastname_ok'"><h2>All Employees Data Table Sorted By Lastname</h2></div>
+
+<div th:if="${message5} =='emp_reg_ok'"><h2>Employee Data Is Successfully Submitted</h2></div>
+<div th:if="${message5} =='emp_reg_bad'"><h2>Please Fill All Fields Correctly</h2></div>
+
+<div th:if="${message5} =='emp_del_empty'"><h2>Find Field Is Empty</h2></div>
+<div th:if="${message5} =='emp_del_not_found'"><h2>No Employee Found For This Id</h2></div>
+<div th:if="${message5} =='emp_del_not_int'"><h2>Find Field Is Not Number</h2></div>
+<div th:if="${message5} =='emp_del_ok'"><h2>The Employee Data Is Deleted</h2></div>
+
+<div th:if="${message5} =='find_empty'"><h2>Find Field Is Empty</h2></div>
+<div th:if="${message5} =='not_integer'"><h2>Find Field Is Not Number</h2></div>
+<div th:if="${message5} =='not_letters'"><h2>Find Field Does Not Contain Only Latter</h2></div>
+<div th:if="${message5} =='not_found'"><h2>There Is No Match In The Database For Your Query</h2></div>
+<div th:if="${message5} =='is_found'"><h2>Found These Employee List For Your Query</h2></div>
+
+<div th:if="${message5} =='emp_without_man_yes'"><h2>The Employees List Who Don't Have Manager And Need To Be Updated</h2></div>
+<div th:if="${message5} =='emp_without_man_no'"><h2>There Is No Employee In The Database Who Doesn't Have Manager</h2></div>
+
+<div th:if="${message4} =='ok'">
+<table border="1">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Position</th>
+            <th>Salary</th>
+            <th>Manager_Id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each = "employee : ${employees}">
+            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.firstname}"></td>
+            <td th:text="${employee.lastname}"></td>
+            <td th:text="${employee.position}"></td>
+            <td th:text="${employee.salary}"></td>
+            <td th:text="${employee.manager_id}"></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<h3><a href="http://localhost:8080/empAccessPage" class="button">Go to Employee Data Access Page</a></h3>
+
+</body>
+</html>

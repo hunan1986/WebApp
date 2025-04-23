@@ -1,0 +1,13 @@
+spring.application.name=WebApp
+#spring.security.user.name=hunan
+#spring.security.user.password=1111
+#spring.mvc.view.suffix=.jsp
+
+#server.servlet.session.timeout=60s
+#logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %class - %method - %msg%n
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/db2
+spring.datasource.username=postgres
+spring.datasource.password=123456789
+spring.jpa.hibernate.ddl-auto=update
+spring.session.jdbc.initialize-schema=always

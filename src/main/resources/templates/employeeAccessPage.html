@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EmployeeDataAccessPage</title>
+    <link rel="stylesheet" th:href="@{/css/button.css}">
+</head>
+<body>
+
+<h2>Welcome to Employee Data Access Page</h2>
+
+For Id, Salary and Manager_Id fields use only numbers and for Firstname, Lastname and Position fields use only letters
+
+<form th:action="@{/employee_reg}"  method="post">
+    <div><input type="text" name="id" placeholder="Id"/></div>
+    <div><input type="text" name="firstname" placeholder="Firstname"/></div>
+    <div><input type="text" name="lastname" placeholder="Lastname"/></div>
+    <div><input type="text" name="position" placeholder="Position"/></div>
+    <div><input type="text" name="salary" placeholder="Salary"/></div>
+    <div><input type="text" name="manager_id" placeholder="Manager_Id"/></div>
+    <input type="submit" value="Register Employee or Update Employee Data">
+</form><br>
+
+<form th:action="@{/employee_del}"  method="post">
+    <div><input type="text" name="id" placeholder="Id"/></div>
+    <input type="submit" value="Delete Employee By Id">
+</form><br>
+
+<form th:action="@{/find_employee}"  method="post">
+    <input type="text" name="find" placeholder="Find"/><br>
+    <input type="radio" id="id" name="field" value="id" checked="checked">
+    <label for="id">By Id</label><br>
+    <input type="radio" id="firstname" name="field" value="firstname">
+    <label for="firstname">By Firstname</label><br>
+    <input type="radio" id="lastname" name="field" value="lastname">
+    <label for="lastname">By Lastname</label><br>
+    <input type="radio" id="position" name="field" value="position">
+    <label for="position">By Position</label><br>
+    <input type="radio" id="salary" name="field" value="salary">
+    <label for="salary">By Salary</label><br>
+    <input type="radio" id="manager_id" name="field" value="manager_id">
+    <label for="manager_id">By Manager_Id</label><br>
+    <input type="submit" value="Find Employee">
+</form><br>
+
+<form th:action="@{/employees_table_sorted}"  method="get">
+    Get All Employees Table Sorted<br>
+    <input type="radio" id="by_id" name="sorted_by" value="by_id" checked="checked">
+    <label for="by_id">By Id</label><br>
+    <input type="radio" id="by_firstname" name="sorted_by" value="by_firstname">
+    <label for="by_firstname">By Firstname</label><br>
+    <input type="radio" id="by_lastname" name="sorted_by" value="by_lastname">
+    <label for="by_lastname">By Lastname</label><br>
+    <input type="radio" id="by_salary" name="sorted_by" value="by_salary">
+    <label for="by_salary">By Salary</label><br>
+    <input type="submit" value="Show Table"><br>
+</form>
+
+<h3><a href="http://localhost:8080/employees_xml" class="button">Get All Employees In XML Format</a></h3>
+<h3><a href="http://localhost:8080/employees" class="button">Get All Employees In JSON Format</a></h3>
+<h3><a href="http://localhost:8080/employees_without_manager" class="button">Get All Employees Who Don't Have Manager</a></h3>
+<h3><a href="http://localhost:8080/" class="button">Go to the Home Page</a></h3>
+<h3><a href="http://localhost:8080/logout" class="button">Log out</a></h3>
+
+
+</body>
+</html>

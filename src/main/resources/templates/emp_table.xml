@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CEO id="1" name="Adalyn Woodard" salary="15000">
+    <Director id="2" name="Westley Mack" salary="12000">
+        <Manager id="4" name="Brecken Brock" salary="5000">
+            <Developer id="8" name="Huxley Lyons" salary="2000"/>
+            <Developer id="9" name="Brecken Scott" salary="3000"/>
+            <Developer id="10" name="Leo Bass" salary="2500"/>
+        </Manager>
+        <Manager id="5" name="Jada Bass" salary="7000">
+            <Developer id="11" name="Everly Silva" salary="4000"/>
+            <Developer id="12" name="Luka Avery" salary="3000"/>
+            <Developer id="13" name="Meghan Carey" salary="5000"/>
+        </Manager>
+    </Director>
+    <Director id="3" name="Nadia Cuevas" salary="10000">
+        <Manager id="6" name="Brecken Hester" salary="8000">
+            <Developer id="14" name="Watson Fuentes" salary="2000"/>
+            <Developer id="15" name="Nadia Carey" salary="3500"/>
+            <Developer id="16" name="Jayce Church" salary="4000"/>
+        </Manager>
+        <Manager id="7" name="Zendaya Bass" salary="6000">
+            <Developer id="17" name="Hudson Adams" salary="3000"/>
+            <Developer id="18" name="Hudson Scott" salary="4000"/>
+            <Developer id="19" name="Watson Cuevas" salary="4500"/>
+        </Manager>
+    </Director>
+</CEO>
