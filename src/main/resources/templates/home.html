@@ -11,13 +11,13 @@
 <div th:if="${message2} =='no'">
     <h3>You are not logged in</h3>
     <h3>To access employees' data please log in <a href="/login" class="button">Go to Log in Page</a></h3>
-    <h3>If you are not registered please go to register page <a href="http://localhost:8080/register" class="button">Go to Register Page</a></h3>
+    <h3>If you are not registered please go to register page <a href="/register" class="button">Go to Register Page</a></h3>
 </div>
 
 <div th:if="${message2} =='yes'">
     <h3>You are logged in</h3>
-    <h3><a href="http://localhost:8080/empAccessPage" class="button">Go to Employee Data Access Page</a></h3>
-    <h3><a href="http://localhost:8080/logout" class="button">Log out</a></h3>
+    <h3><a href="/empAccessPage" class="button">Go to Employee Data Access Page</a></h3>
+    <h3><a href="/logout" class="button">Log out</a></h3>
 </div>
 
 <br>
