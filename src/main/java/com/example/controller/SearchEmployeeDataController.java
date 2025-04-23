@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.repo.EmployeeRepo;
 import com.example.model.Employee;
+import com.example.repo.EmployeeRepo;
 import com.example.service.EmployeeDataAccessService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class SearchEmployeeDataController {
         String field = request.getParameter("field");
         String find = request.getParameter("find");
         String message4 = "bad";
-        String message5 = employeeDataAccessService.employeeDataSearchCheck(find,field);
+        String message5 = employeeDataAccessService.employeeDataSearchCheck(find, field);
         if (!message5.equals("find_ok")) {
             model.addAttribute("message4", message4);
             model.addAttribute("message5", message5);

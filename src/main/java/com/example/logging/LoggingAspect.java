@@ -19,7 +19,7 @@ public class LoggingAspect {
     public void logBeforeEmployeeXML(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().getName();
         String className = joinPoint.getTarget().getClass().getSimpleName();
-        logger.info("{}.{}.{}",className, methodName, "Before");
+        logger.info("{}.{}.{}", className, methodName, "Before");
     }
 
 
@@ -30,7 +30,7 @@ public class LoggingAspect {
         long executionTime = System.currentTimeMillis() - startTime;
         String methodName = joinPoint.getSignature().getName();
         String className = joinPoint.getTarget().getClass().getSimpleName();
-        logger.info("{}.{}.{}ms",className, methodName,executionTime);
+        logger.info("{}.{}.{}ms", className, methodName, executionTime);
         return proceed;
     }
 
@@ -38,7 +38,7 @@ public class LoggingAspect {
     public void logAfterReturningEmployeeXML(JoinPoint joinPoint, Object results) {
         String methodName = joinPoint.getSignature().getName();
         String className = joinPoint.getTarget().getClass().getSimpleName();
-        logger.info("className {}. methodName {}. message {} arguments[s] {} results {}",className, methodName,"AfterReturning", Arrays.toString(joinPoint.getArgs()), results);
+        logger.info("className {}. methodName {}. message {} arguments[s] {} results {}", className, methodName, "AfterReturning", Arrays.toString(joinPoint.getArgs()), results);
         //System.out.println("Before xml");
     }
 
@@ -46,7 +46,7 @@ public class LoggingAspect {
     public void logAfterEmployeeXML(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().getName();
         String className = joinPoint.getTarget().getClass().getSimpleName();
-        logger.info("{}.{}.{}",className, methodName,"After");
+        logger.info("{}.{}.{}", className, methodName, "After");
 
     }
 
@@ -54,6 +54,6 @@ public class LoggingAspect {
     public void logAfterThrowingEmployeeXML(JoinPoint joinPoint, Throwable ex) {
         String methodName = joinPoint.getSignature().getName();
         String className = joinPoint.getTarget().getClass().getSimpleName();
-        logger.info("{}.{}.{}",className, methodName,ex.getMessage());
+        logger.info("{}.{}.{}", className, methodName, ex.getMessage());
     }
 }

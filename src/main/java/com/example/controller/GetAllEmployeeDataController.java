@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.repo.EmployeeRepo;
 import com.example.model.Employee;
+import com.example.repo.EmployeeRepo;
 import com.example.service.EmployeeDataAccessService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -42,8 +43,7 @@ public class GetAllEmployeeDataController {
         List<Employee> employees = employeeRepo.findAll();
         if (!employees.isEmpty()) {
             return new ResponseEntity<>(employees, HttpStatus.OK);
-        }
-        else {
+        } else {
             return new ResponseEntity<>(employees, HttpStatus.valueOf(404));
         }
     }
@@ -92,8 +92,8 @@ public class GetAllEmployeeDataController {
         PrintWriter out = response.getWriter();
         List<Employee> employees = employeeRepo.findAll();
         //employees.sort(Comparator.comparingInt(Employee::getId));
-        int num_of_emp = employees.size() -1;
-        if(num_of_emp >=1 ) {
+        int num_of_emp = employees.size() - 1;
+        if (num_of_emp >= 1) {
             employees.sort(Comparator.comparingInt(Employee::getManager_id));
             int max_manager_id = employees.getLast().getManager_id();
             try {
@@ -134,11 +134,10 @@ public class GetAllEmployeeDataController {
                     FileReader fileReader = new FileReader(file);
                     BufferedReader buffReader = new BufferedReader(fileReader);
                     String buffer = "";
-                    while( (buffer = buffReader.readLine() ) != null)
+                    while ((buffer = buffReader.readLine()) != null)
                         out.println(buffer);
                     buffReader.close();
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     //System.out.println(e);
                     //System.out.println("Error reading xml");
                     out.println("<error>");
@@ -153,8 +152,7 @@ public class GetAllEmployeeDataController {
                 out.println("</error>");
             }
 
-        }
-        else {
+        } else {
             out.println("<error>");
             out.println("<The_number_of_employees_is_not_enough_to_create_xml_data/>");
             out.println("</error>");
@@ -162,42 +160,42 @@ public class GetAllEmployeeDataController {
     }
 
     @GetMapping("/employees_without_manager")
-    public ModelAndView employees_without_manager()  {
-            ModelAndView mv = new ModelAndView();
-            mv.setViewName("display.html");
-            List<Employee> employees = employeeRepo.findAll();
-            int num_of_emp = employees.size() -1;
-            String message4 = "bad";
-            String message5 = "emp_without_man_no";
-            if(num_of_emp >=1 ) {
-                List<Employee> employees2 = new ArrayList<>();
-                employees.sort(Comparator.comparingInt(Employee::getManager_id));
-                int max_manager_id = employees.getLast().getManager_id();
-                for (int i = 1; i <= max_manager_id; i++) {
-                    for (int j = 0; j <= num_of_emp; j++) {
-                        if (employees.get(j).getManager_id() == i) {
-                            int exist = 0;
-                            for (int k = 0; k <= num_of_emp; k++) {
-                                if (employees.get(k).getId() == i) {
-                                    exist = 1;
-                                    break;
-                                }
+    public ModelAndView employees_without_manager() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("display.html");
+        List<Employee> employees = employeeRepo.findAll();
+        int num_of_emp = employees.size() - 1;
+        String message4 = "bad";
+        String message5 = "emp_without_man_no";
+        if (num_of_emp >= 1) {
+            List<Employee> employees2 = new ArrayList<>();
+            employees.sort(Comparator.comparingInt(Employee::getManager_id));
+            int max_manager_id = employees.getLast().getManager_id();
+            for (int i = 1; i <= max_manager_id; i++) {
+                for (int j = 0; j <= num_of_emp; j++) {
+                    if (employees.get(j).getManager_id() == i) {
+                        int exist = 0;
+                        for (int k = 0; k <= num_of_emp; k++) {
+                            if (employees.get(k).getId() == i) {
+                                exist = 1;
+                                break;
                             }
-                            if (exist == 0)  {
-                                employees2.add(employees.get(j));
-                            }
+                        }
+                        if (exist == 0) {
+                            employees2.add(employees.get(j));
                         }
                     }
                 }
-                if (!employees2.isEmpty()) {
-                    message4 = "ok";
-                    message5 = "emp_without_man_yes";
-                    mv.addObject("employees", employees2);
-                }
             }
-            mv.addObject("message4", message4);
-            mv.addObject("message5", message5);
-            return mv;
+            if (!employees2.isEmpty()) {
+                message4 = "ok";
+                message5 = "emp_without_man_yes";
+                mv.addObject("employees", employees2);
+            }
+        }
+        mv.addObject("message4", message4);
+        mv.addObject("message5", message5);
+        return mv;
     }
 
 }

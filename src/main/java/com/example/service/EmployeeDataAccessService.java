@@ -1,7 +1,7 @@
 package com.example.service;
 
-import com.example.repo.EmployeeRepo;
 import com.example.model.Employee;
+import com.example.repo.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class EmployeeDataAccessService {
     EmployeeRepo employeeRepo;
 
     public String employeeDataCheck(String id, String firstname, String lastname, String position, String salary, String manager_id) {
-        if(id.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || position.isEmpty() || salary.isEmpty() || manager_id.isEmpty()) {
+        if (id.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || position.isEmpty() || salary.isEmpty() || manager_id.isEmpty()) {
             return "bad";
         }
         try {
@@ -25,13 +25,13 @@ public class EmployeeDataAccessService {
         } catch (Exception e) {
             return "bad";
         }
-        if(!firstname.matches("[a-zA-Z]*")) {
+        if (!firstname.matches("[a-zA-Z]*")) {
             return "bad";
         }
-        if(!lastname.matches("[a-zA-Z]*")) {
+        if (!lastname.matches("[a-zA-Z]*")) {
             return "bad";
         }
-        if(!position.matches("[a-zA-Z]*")) {
+        if (!position.matches("[a-zA-Z]*")) {
             return "bad";
         }
         return "ok";
@@ -42,7 +42,7 @@ public class EmployeeDataAccessService {
         if (find.isEmpty()) {
             return "find_empty";
         }
-        if (field.equals("id") || field.equals("salary") || field.equals("manager_id")){
+        if (field.equals("id") || field.equals("salary") || field.equals("manager_id")) {
             try {
                 int int_id = Integer.parseInt(find);
             } catch (Exception e) {
@@ -62,8 +62,8 @@ public class EmployeeDataAccessService {
         switch (field) {
             case "id" -> {
                 int int_id = Integer.parseInt(find);
-                employees.add(employeeRepo.findById(int_id).orElse(new Employee(0, "delete", "delete", "delete", 0,0 )));
-                if(employees.getFirst().getId() == 0 ){
+                employees.add(employeeRepo.findById(int_id).orElse(new Employee(0, "delete", "delete", "delete", 0, 0)));
+                if (employees.getFirst().getId() == 0) {
                     employees.clear();
                 }
                 return employees;
@@ -95,13 +95,13 @@ public class EmployeeDataAccessService {
     }
 
     public String emp_del_check(String id) {
-        if(id.isEmpty()) {
+        if (id.isEmpty()) {
             return "emp_del_empty";
         }
         try {
             int int_id = Integer.parseInt(id);
-            Employee employee = employeeRepo.findById(int_id).orElse(new Employee(0, "delete", "delete", "delete", 0,0 ));
-            if(employee.getId() == 0 ){
+            Employee employee = employeeRepo.findById(int_id).orElse(new Employee(0, "delete", "delete", "delete", 0, 0));
+            if (employee.getId() == 0) {
                 return "emp_del_not_found";
             }
         } catch (Exception e) {

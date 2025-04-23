@@ -1,7 +1,7 @@
 package com.example.service;
 
-import com.example.repo.UserRepo;
 import com.example.model.Users;
+import com.example.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,27 +19,27 @@ public class RegisterService {
 
         Users user = repo.findByUsername(username);
 
-        if(username.isEmpty()) {
+        if (username.isEmpty()) {
             return "null_username";
         }
-        if(password.isEmpty()) {
+        if (password.isEmpty()) {
             return "null_password";
         }
-        if(confirm_password.isEmpty()) {
+        if (confirm_password.isEmpty()) {
             return "null_confirm_password";
         }
-        if(user != null) {
+        if (user != null) {
             return "exists";
         }
-        if(!username.matches("[a-zA-Z0-9]*")) {
+        if (!username.matches("[a-zA-Z0-9]*")) {
             return "num_lett";
         }
-        if(password.length() < 8) {
+        if (password.length() < 8) {
             return "pass_not_8char";
         }
         //todo move specialCharacters to property file
-        String specialCharacters=" !#$%&'()*+,-./:;<=>?@[]^_`{|}~";
-        String str2[]=password.split("");
+        String specialCharacters = " !#$%&'()*+,-./:;<=>?@[]^_`{|}~";
+        String str2[] = password.split("");
         boolean pass_check = false;
         for (String s : str2) {
             if (specialCharacters.contains(s)) {
@@ -47,10 +47,10 @@ public class RegisterService {
                 break;
             }
         }
-        if(!(password.matches(".*[A-Z].*") && password.matches(".*[a-z].*") && password.matches(".*[0-9].*") && pass_check)) {
+        if (!(password.matches(".*[A-Z].*") && password.matches(".*[a-z].*") && password.matches(".*[0-9].*") && pass_check)) {
             return "pass_cont_issue";
         }
-        if(!password.equals(confirm_password)) {
+        if (!password.equals(confirm_password)) {
             return "pass_not_match";
         }
 
