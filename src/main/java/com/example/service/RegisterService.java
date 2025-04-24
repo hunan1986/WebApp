@@ -54,8 +54,13 @@ public class RegisterService {
             return "pass_not_match";
         }
 
+        int user_id = 0;
         this.passwordEncoder = new BCryptPasswordEncoder(12);
-        int user_id = repo.getMaxId() + 1;
+        try {
+            user_id = repo.getMaxId() + 1;
+        } catch (Exception e) {
+            user_id = 1;
+        }
         String bcrypt_password = this.passwordEncoder.encode(password);
         Users userNew = new Users(user_id, username, bcrypt_password);
         repo.save(userNew);
