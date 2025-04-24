@@ -6,6 +6,7 @@ import com.example.service.EmployeeDataAccessService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,9 +38,20 @@ public class GetAllEmployeeDataController {
     @Autowired
     EmployeeDataAccessService employeeDataAccessService;
 
-    @GetMapping("/employees")
+    @GetMapping(value = "/employees", produces = {"application/json"})
     @ResponseBody
-    public ResponseEntity<List<Employee>> getEmployees() {
+    public ResponseEntity<List<Employee>> getEmployeesJson() {
+        List<Employee> employees = employeeRepo.findAll();
+        if (!employees.isEmpty()) {
+            return new ResponseEntity<>(employees, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(employees, HttpStatus.valueOf(404));
+        }
+    }
+
+    @GetMapping(value = "/employeesXml", produces = {"application/xml"})
+    @ResponseBody
+    public ResponseEntity<List<Employee>> getEmployeesXml() {
         List<Employee> employees = employeeRepo.findAll();
         if (!employees.isEmpty()) {
             return new ResponseEntity<>(employees, HttpStatus.OK);
@@ -55,31 +67,43 @@ public class GetAllEmployeeDataController {
         String sorted_by = request.getParameter("sorted_by");
         String message4 = "bad";
         String message5 = "emp_table_bad";
-        List<Employee> employees = employeeRepo.findAll();
-        if (!employees.isEmpty() && sorted_by.equals("by_id")) {
-            message4 = "ok";
-            message5 = "emp_table_ok";
-            //todo get already sorted data from db
-            employees.sort(Comparator.comparingInt(Employee::getId));
-            mv.addObject("employees", employees);
+        //List<Employee> employees = employeeRepo.findAll();
+        if (sorted_by.equals("by_id")) {
+            //todo get already sorted data from db (done)
+            //employees.sort(Comparator.comparingInt(Employee::getId));
+            List<Employee> employees = employeeRepo.findAll(Sort.by("id"));
+            if (!employees.isEmpty()) {
+                message4 = "ok";
+                message5 = "emp_table_ok";
+                mv.addObject("employees", employees);
+            }
         }
-        if (!employees.isEmpty() && sorted_by.equals("by_salary")) {
-            message4 = "ok";
-            message5 = "emp_table_by_salary_ok";
-            employees.sort(Comparator.comparingInt(Employee::getSalary));
-            mv.addObject("employees", employees);
+        if (sorted_by.equals("by_salary")) {
+            //employees.sort(Comparator.comparingInt(Employee::getSalary));
+            List<Employee> employees = employeeRepo.findAll(Sort.by("salary"));
+            if (!employees.isEmpty()) {
+                message4 = "ok";
+                message5 = "emp_table_by_salary_ok";
+                mv.addObject("employees", employees);
+            }
         }
-        if (!employees.isEmpty() && sorted_by.equals("by_firstname")) {
-            message4 = "ok";
-            message5 = "emp_table_by_firstname_ok";
-            employees.sort(Comparator.comparing(Employee::getFirstname));
-            mv.addObject("employees", employees);
+        if (sorted_by.equals("by_firstname")) {
+            //employees.sort(Comparator.comparing(Employee::getFirstname));
+            List<Employee> employees = employeeRepo.findAll(Sort.by("firstname"));
+            if (!employees.isEmpty()) {
+                message4 = "ok";
+                message5 = "emp_table_by_firstname_ok";
+                mv.addObject("employees", employees);
+            }
         }
-        if (!employees.isEmpty() && sorted_by.equals("by_lastname")) {
-            message4 = "ok";
-            message5 = "emp_table_by_lastname_ok";
-            employees.sort(Comparator.comparing(Employee::getLastname));
-            mv.addObject("employees", employees);
+        if (sorted_by.equals("by_lastname")) {
+            //employees.sort(Comparator.comparing(Employee::getLastname));
+            List<Employee> employees = employeeRepo.findAll(Sort.by("lastname"));
+            if (!employees.isEmpty()) {
+                message4 = "ok";
+                message5 = "emp_table_by_lastname_ok";
+                mv.addObject("employees", employees);
+            }
         }
         mv.addObject("message4", message4);
         mv.addObject("message5", message5);
