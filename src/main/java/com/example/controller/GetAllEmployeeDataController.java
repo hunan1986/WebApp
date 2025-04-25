@@ -152,7 +152,7 @@ public class GetAllEmployeeDataController {
                 transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
                 transformer.setOutputProperty(OutputKeys.INDENT, "yes");
                 transformer.transform(source, result);
-                //System.out.println("Data is written to file");
+                System.out.println("Data is written to file");
                 try {
                     File file = new File("src\\main\\resources\\templates\\emp_table.xml");
                     FileReader fileReader = new FileReader(file);
