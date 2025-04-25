@@ -163,7 +163,7 @@ public class GetAllEmployeeDataController {
                     buffReader.close();
                 } catch (Exception e) {
                     //System.out.println(e);
-                    //System.out.println("Error reading xml");
+                    System.out.println("Error reading xml");
                     out.println("<error>");
                     out.println("<Error_reading_xml/>");
                     out.println("</error>");
