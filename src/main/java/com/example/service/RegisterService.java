@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.config.properties.WebAppProperties;
 import com.example.model.Users;
 import com.example.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RegisterService {
+
+    @Autowired
+    private WebAppProperties webAppProperties;
 
     @Autowired
     private UserRepo repo;
@@ -37,8 +41,10 @@ public class RegisterService {
         if (password.length() < 8) {
             return "pass_not_8char";
         }
-        //todo move specialCharacters to property file
-        String specialCharacters = " !#$%&'()*+,-./:;<=>?@[]^_`{|}~";
+        //todo move specialCharacters to property file (done)
+        //String specialCharacters = " !#$%&'()*+,-./:;<=>?@[]^_`{|}~";
+        String specialCharacters = webAppProperties.getSpecialCharacters();
+        System.out.println("show specialCharacters " + specialCharacters);
         String str2[] = password.split("");
         boolean pass_check = false;
         for (String s : str2) {
@@ -55,7 +61,7 @@ public class RegisterService {
         }
 
         int user_id = 0;
-        this.passwordEncoder = new BCryptPasswordEncoder(12);
+        this.passwordEncoder = new BCryptPasswordEncoder(webAppProperties.getBcrypt().getStrength());
         try {
             user_id = repo.getMaxId() + 1;
         } catch (Exception e) {

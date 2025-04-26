@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class WebAppProperties {
 
     private Bcrypt bcrypt;
+    private String specialCharacters;
 
     public Bcrypt getBcrypt() {
         return bcrypt;
@@ -15,6 +16,14 @@ public class WebAppProperties {
 
     public void setBcrypt(Bcrypt bcrypt) {
         this.bcrypt = bcrypt;
+    }
+
+    public String getSpecialCharacters() {
+        return specialCharacters;
+    }
+
+    public void setSpecialCharacters(String specialCharacters) {
+        this.specialCharacters = specialCharacters;
     }
 
     public static class Bcrypt {
