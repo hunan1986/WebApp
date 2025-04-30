@@ -1,5 +1,6 @@
 package com.example.config;
 
+
 import com.example.config.properties.WebAppProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,16 +14,21 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity // this is to give your own configs
 public class SecurityConfig {
 
-    @Autowired
-    private WebAppProperties webAppProperties;
+    //@Autowired
+    //private WebAppProperties webAppProperties;
+
     @Autowired
     public UserDetailsService userDetailsService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Bean
     public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
@@ -54,7 +60,8 @@ public class SecurityConfig {
     public AuthenticationProvider authenticationProvider() {
         final DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         //provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance()); // no Bcrypt password
-        provider.setPasswordEncoder(new BCryptPasswordEncoder(webAppProperties.getBcrypt().getStrength()));
+        //provider.setPasswordEncoder(new BCryptPasswordEncoder(webAppProperties.getBcrypt().getStrength()));
+        provider.setPasswordEncoder(this.passwordEncoder);
         provider.setUserDetailsService(userDetailsService);
         return provider;
     }

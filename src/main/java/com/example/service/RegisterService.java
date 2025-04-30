@@ -1,5 +1,6 @@
 package com.example.service;
 
+
 import com.example.config.properties.WebAppProperties;
 import com.example.model.Users;
 import com.example.repo.UserRepo;
@@ -17,6 +18,7 @@ public class RegisterService {
     @Autowired
     private UserRepo repo;
 
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     public String registerHandler(String username, String password, String confirm_password) {
@@ -61,7 +63,7 @@ public class RegisterService {
         }
 
         int user_id = 0;
-        this.passwordEncoder = new BCryptPasswordEncoder(webAppProperties.getBcrypt().getStrength());
+        //this.passwordEncoder = new BCryptPasswordEncoder(webAppProperties.getBcrypt().getStrength());
         try {
             user_id = repo.getMaxId() + 1;
         } catch (Exception e) {
